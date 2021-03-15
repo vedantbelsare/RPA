@@ -1,0 +1,307 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="CreateSubFolderInsideDept" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_str_UpdatedPathWithCompanyName" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>979.2,5642.4</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>CreateSubFolderInsideDept_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="28">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="26">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="CreateEnquiryFolders" sap:VirtualizedContainerService.HintSize="752,5577.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_CustomerMaster" />
+      <Variable x:TypeArguments="x:String" Name="str_RootFolderPath" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_ClientMaster" />
+      <Variable x:TypeArguments="x:String" Name="str_FYStartingMonth" />
+      <Variable x:TypeArguments="x:String" Name="Final_Year" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathWithFY" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathWithCompanyName" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideEnquiry" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideEnquiryDocs" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInside2DDrawing" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideReferenceModel" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideToolDesign" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideScopeOfWork" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideWorking" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideQuotation" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathInsideOrderStatus" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathWithCustProjectName" />
+      <Variable x:TypeArguments="x:String" Name="updatedPathWithFYearProject" />
+      <Variable x:TypeArguments="x:Int32" Name="int_CustomerMasterIndex" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="710.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Data Management\ReadNewMasterFile.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_ClientMasterDT">[DT_ClientMaster]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_CustomerMasterDT">[DT_CustomerMaster]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_UserMasterDT" />
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DT_ClientMaster]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="710.4,738.4" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="385.6,589.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="344,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathWithCompanyName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[in_str_UpdatedPathWithCompanyName]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LookupDataTable LookupColumnName="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[DT_ClientMaster]" DisplayName="Lookup Data Table" sap:VirtualizedContainerService.HintSize="344,22.4" sap2010:WorkflowViewState.IdRef="LookupDataTable_1" LookupColumnIndex="[0]" LookupValue="Starting month of Financial Year" TargetColumnIndex="[1]">
+              <ui:LookupDataTable.CellValue>
+                <OutArgument x:TypeArguments="x:String">[str_FYStartingMonth]</OutArgument>
+              </ui:LookupDataTable.CellValue>
+            </ui:LookupDataTable>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="344,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Data Management\DetermineFiscalYear.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_DateTime_EmailTimestamp">[dateTime.Now]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="out_str_FiscalYear">[Final_Year]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_str_FYStartMonth">[str_FYStartingMonth]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <Assign sap:VirtualizedContainerService.HintSize="344,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathWithFY]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathWithCompanyName, Final_Year)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder For Fiscal year" sap:VirtualizedContainerService.HintSize="344,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[updatedPathWithFY]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:ForEachRow CurrentIndex="[int_CustomerMasterIndex]" DataTable="[DT_CustomerMaster]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="710.4,4552.8" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="660.8,4404" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[row(in_Config(&quot;Header_CustomerProjectName&quot;).ToString).ToString.Trim.Equals(&quot;&quot;)]" sap:VirtualizedContainerService.HintSize="619.2,874.4" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="475.2,724.8" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="433.6,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[updatedPathWithCustProjectName]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathWithFY, row(5).ToString)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[updatedPathWithCustProjectName]" />
+                  <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="433.6,290.4" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" Visible="False" WorkbookPath="[in_Config(&quot;Path_MasterFile&quot;).ToString]">
+                    <ui:ExcelApplicationScope.Body>
+                      <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="375.2,180.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:ExcelWriteCell Cell="[&quot;K&quot; + (int_CustomerMasterIndex + 2).ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="[in_Config(&quot;SheetName_CustomerMaster&quot;).ToString]" Text="[updatedPathWithCustProjectName]" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ExcelApplicationScope.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelApplicationScope>
+                  <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="[Path.Combine(updatedPathWithCustProjectName, in_Config(&quot;Folder_Enquiry&quot;).ToString)]" />
+                </Sequence>
+              </If.Else>
+            </If>
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideEnquiry]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathWithCustProjectName, in_Config("Folder_Enquiry").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_5" Path="[Path.Combine(updatedPathInsideEnquiry, in_Config(&quot;Folder_EnquiryDocs&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_6" Path="[Path.Combine(updatedPathInsideEnquiry, in_Config(&quot;Folder_Working&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_7" Path="[Path.Combine(updatedPathInsideEnquiry, in_Config(&quot;Folder_Quotation&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_8" Path="[Path.Combine(updatedPathInsideEnquiry, in_Config(&quot;Folder_OrderStatus&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideEnquiryDocs]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiry, in_Config("Folder_EnquiryDocs").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_9" Path="[Path.Combine(updatedPathInsideEnquiryDocs, in_Config(&quot;Folder_ReferenceModel&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_10" Path="[Path.Combine(updatedPathInsideEnquiryDocs, in_Config(&quot;Folder_2DDrawing&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_11" Path="[Path.Combine(updatedPathInsideEnquiryDocs, in_Config(&quot;Folder_ToolDesign&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_12" Path="[Path.Combine(updatedPathInsideEnquiryDocs, in_Config(&quot;Folder_ScopeOfWork&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideReferenceModel]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiryDocs, in_Config("Folder_ReferenceModel").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_13" Path="[Path.Combine(updatedPathInsideReferenceModel, in_Config(&quot;Folder_CurrentVersion&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_14" Path="[Path.Combine(updatedPathInsideReferenceModel, in_Config(&quot;Folder_PreviousVersion&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInside2DDrawing]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiryDocs, in_Config("Folder_2DDrawing").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_15" Path="[Path.Combine(updatedPathInside2DDrawing, in_Config(&quot;Folder_CurrentVersion&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_16" Path="[Path.Combine(updatedPathInside2DDrawing, in_Config(&quot;Folder_PreviousVersion&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideToolDesign]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiryDocs, in_Config("Folder_ToolDesign").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_17" Path="[Path.Combine(updatedPathInsideToolDesign, in_Config(&quot;Folder_CurrentVersion&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_18" Path="[Path.Combine(updatedPathInsideToolDesign, in_Config(&quot;Folder_PreviousVersion&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideScopeOfWork]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiryDocs, in_Config("Folder_ScopeOfWork").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_19" Path="[Path.Combine(updatedPathInsideScopeOfWork, in_Config(&quot;Folder_CurrentVersion&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_20" Path="[Path.Combine(updatedPathInsideScopeOfWork, in_Config(&quot;Folder_PreviousVersion&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideWorking]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiry, in_Config("Folder_Working").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_21" Path="[Path.Combine(updatedPathInsideWorking, in_Config(&quot;Folder_WorkingLog&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideQuotation]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiry, in_Config("Folder_Quotation").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_22" Path="[Path.Combine(updatedPathInsideQuotation, in_Config(&quot;Folder_QuotationLog&quot;).ToString)]" />
+            <Assign sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[updatedPathInsideOrderStatus]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.Combine(updatedPathInsideEnquiry, in_Config("Folder_OrderStatus").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_23" Path="[Path.Combine(updatedPathInsideOrderStatus, in_Config(&quot;Folder_OrderStatusLog&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_24" Path="[Path.Combine(updatedPathInsideOrderStatus, in_Config(&quot;Folder_Followup&quot;).ToString)]" />
+            <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="619.2,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_25" Path="[Path.Combine(updatedPathInsideOrderStatus, in_Config(&quot;Folder_ReasonForNoOrder&quot;).ToString)]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+  </Sequence>
+</Activity>
